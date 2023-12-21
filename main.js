@@ -465,13 +465,13 @@ function renderSvgFromStep(index){
   }
 
   async function drawView3() {
-    const total_data = await getData();
+    const total_data = await d3.csv('/data/view3/payroll-effectiveness.csv');
     VIEW_3_DATA = total_data
     //get Runs Scored data
-    const runsScored = getColumnnView3('r', VIEW_3_DATA);
-    const invert_era = getColumnnView3('era', VIEW_3_DATA).map(item => 1 / item)
-    const totalPayroll = getColumnnView3('totalPayroll', VIEW_3_DATA);
-    
+    const runsScored = VIEW_3_DATA.map(d => d['R'])
+    const invert_era = VIEW_3_DATA.map(d => d['ERA']).map(item => 1 / item)
+    const totalPayroll = VIEW_3_DATA.map(d => parseFloat(d["2023 Total Payroll"]))
+
     //xScale: Runs Scored
     const size = d3.scaleSqrt().domain([d3.min(totalPayroll), d3.max(totalPayroll)]).range([10, 35]);
     const xScale = d3.scaleLinear()
@@ -522,20 +522,20 @@ function renderSvgFromStep(index){
                     .style('text-anchor', 'middle')
                     
     g.selectAll('circle')
-      .data(total_data)
+      .data(VIEW_3_DATA)
       .enter()
       .append("circle")
       .attr("class", "circ")
       .attr("stroke", "black")
-      .attr("r", d => Math.abs(size(d['totalPayroll'])))
-      .attr("cx", d => xScale(d['r']))
+      .attr("r", d => Math.abs(size(d['2023 Total Payroll'])))
+      .attr("cx", d => xScale(d['R']))
       .attr("cy", (d, i) => yScale(invert_era[i]))
-      .attr("id", d => d['teamCode'])
+      .attr("id", d => d['Team Code'])
       .attr('transform', `translate(${margin.left},${margin.top})`)
-      .attr('opacity', d => getOpacity(d['teamCode']) ?? 0.7)
-      .style("fill", d => TEAM_COLORS[d['teamCode']])        
+      .attr('opacity', d => getOpacity(d['Team Code']) ?? 0.7)
+      .style("fill", d => TEAM_COLORS[d['Team Code']])        
       .on('mouseover', function(event, d) {
-        tooltip.html(() => {return `${d['team']}\n$${d['totalPayroll'].toLocaleString('en-US')}`})
+        tooltip.html(() => `${d['Tm']}\n$${d['2023 Total Payroll'].toLocaleString('en-US')}`)
         // tooltip.html(d => `${d['team']}\n$${d['totalPayroll'].toLocaleString('en-US')}`)
           .style('opacity', 1)
           .style('left', (event.pageX) + 'px')
@@ -549,56 +549,6 @@ function renderSvgFromStep(index){
         .on('mouseout', function() {
           tooltip.style('opacity', 0);
         });
-
-    // function to get the data from payroll-effectiveness.csv
-    async function getData() {
-        return fetch('/data/view3/payroll-effectiveness.csv')
-            .then(response => response.text())
-            .then(csvData => {
-                const noHeader = csvData.split('\n').slice(1); // Skip the header row
-                const data = noHeader.slice(2, 32); //get the rows of actual data
-                const parsedData = data.map((str) => {
-                    const [
-                      team,
-                      rg,
-                      g,
-                      r,
-                      h,
-                      rag,
-                      era,
-                      rank,
-                      teamCode,
-                      roster,
-                      manPayroll,
-                      injuredReserve,
-                      retained,
-                      buried,
-                      suspended,
-                      totalPayroll,
-                    ] = str.split(',');
-    
-                    return {
-                        team,
-                        rg: parseFloat(rg),
-                        g: parseInt(g),
-                        r: parseInt(r),
-                        h: parseInt(h),
-                        rag: parseFloat(rag),
-                        era: parseFloat(era),
-                        rank: parseInt(rank),
-                        teamCode,
-                        roster: parseInt(roster),
-                        manPayroll: parseInt(manPayroll),
-                        injuredReserve: parseInt(injuredReserve),
-                        retained: parseInt(retained),
-                        buried: parseInt(buried),
-                        suspended: parseInt(suspended),
-                        totalPayroll: parseFloat(totalPayroll),
-                    };
-                });
-                return parsedData;
-            });   
-    }
   }
 
   async function drawView4() {
@@ -1174,9 +1124,9 @@ function toggleScale(){
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
-  const runsScored = getColumnnView3('r', VIEW_3_DATA);
-  const invert_era = getColumnnView3('era', VIEW_3_DATA).map(item => 1 / item)
-  const totalPayroll = getColumnnView3('totalPayroll', VIEW_3_DATA);
+  const runsScored = VIEW_3_DATA.map(d => d['R'])
+  const invert_era = VIEW_3_DATA.map(d => d['ERA']).map(item => 1 / item)
+  const totalPayroll = VIEW_3_DATA.map(d => parseFloat(d["2023 Total Payroll"]))
     
   d3.select("#view3-x-axis").remove()
   d3.select("#view3-x-axis-text").remove()
@@ -1236,13 +1186,13 @@ function toggleScale(){
       .join('circle')
       .attr("class", "circ")
       .attr("stroke", "black")
-      .attr("r", d => Math.abs(size(d['totalPayroll'])))
-      .attr("id", d => d['teamCode'])
+      .attr("r", d => Math.abs(size(d['2023 Total Payroll'])))
+      .attr("id", d => d['Team Code'])
       .attr('transform', `translate(${margin.left},${margin.top})`)
-      .attr('opacity', d => getOpacity(d['teamCode']) ?? 0.7)
-      .style("fill", d => TEAM_COLORS[d['teamCode']])        
+      .attr('opacity', d => getOpacity(d['Team Code']) ?? 0.7)
+      .style("fill", d => TEAM_COLORS[d['Team Code']])        
       .transition()
-        .attr("cx", d => xScale(d['r']))
+        .attr("cx", d => xScale(d['R']))
         .attr("cy", (d, i) => yScale(invert_era[i]))
 }
 
