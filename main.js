@@ -465,7 +465,7 @@ function renderSvgFromStep(index){
   }
 
   async function drawView3() {
-    const total_data = await d3.csv('/data/view3/payroll-effectiveness.csv');
+    const total_data = await d3.csv('./data/view3/payroll-effectiveness.csv');
     VIEW_3_DATA = total_data
     //get Runs Scored data
     const runsScored = VIEW_3_DATA.map(d => d['R'])
