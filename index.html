@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>CSE 478 Data Viz Project</title>
+		<script type="module" src="./main.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="./css/index.css"></link>
+		<script src="https://d3js.org/d3.v7.min.js"></script>
+		<script src="https://unpkg.com/scrollama"></script>
+		<script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/sankey.js"></script>
+	</head>
+    <body style="flex-direction: column;display: flex;">
+			<div class="sticky-header">
+				<header style="display:flex; flex-direction: column; align-self: center; align-items: center;">
+					<h2 style=>The MLB 2023 Underdog Postseason</h2>
+				</header>
+			</div>
+			<section id='scroll'>
+				<!--  step/text container  -->
+				<div class='scroll__text'>
+						<div class='step' data-step='1'>
+							<div>
+								<h1 class="display-4 card-title"><b>The 2023 MLB Postseason</b></h1>
+								<span class="card-content">
+The 2023 MLB regular season set many records. This season, three teams blew their budget and ended up with the top five payrolls of all time (with the new record being overshot by $60 million). Yet, none of these expensive teams made the playoffs.
+
+For the first time in history, four teams with fewer than 90 wins made it to the Championship series which ultimately led to a World Series matchup with the fewest combined wins of all time. This was also the least watched World Series on record.
+
+The underdog teams of the regular season dominated in the postseason while the best 4 teams combined for a single win over their 11 games.
+
+The goal of these data visualizations is to grasp the context of how all of this played out.
+								</span>
+							</div>
+						</div>
+						<div class='step' data-step='2'>
+							<div>
+								<h1 class="display-4 card-title"><b>How It Started</b></h1>
+								<span class="card-content">
+The beginning of the postseason started competitively. Out of a 162 game season, it's impressive to see multiple teams with 100+ wins.
+
+Teams like the Braves (NLE), Dodgers (NLW) and Orioles (ALE) were the expected favorites given their proven performance over such a long season.
+
+The playoff threshold this year was 84 wins, showing the disparity between these top teams and those like the Diamondbacks (NLW) and Marlins (NLE).
+								</span>
+							</div>
+								<span></span>
+						</div>
+						<div class='step' data-step='3'>
+							<div>
+								<div>
+									<h1 class="display-4 card-title"><b>Entering the Postseason</b></h1>
+									<span class="card-content">
+Out of the 30 teams in the league, only 12 of them make the postseason. These 12 are made up of the best 6 teams from the National and Atlantic Leagues.
+
+As mentioned before, the teams with the worst records going into the postseason both had 84 wins, yet there were actually 13 teams who performed better than this.
+
+Despite the Seattle Mariners performing within the top 12 records, their 7th place in the Atlantic League prevented them from competing in the postseason.
+									</span>
+								</div>
+							</div>
+							<span class="card-footer">* Because there is interplay of these leagues all season, this disparity suggests that the AL was actually more competitive and had better teams this year. Hover over the pie-chart to see which teams competed from each league.</span>
+						</div>
+						<div class='step' data-step='4'>
+							<div>
+								<div>
+									<h1 class="display-4 card-title"><b>How'd This Happen?</b></h1>
+									<span class="card-content">
+Intuitively, it's expected that the best performing teams would have the most expensive payrolls - as talent costs money.
+
+Here is a chart mapping each team's overall pitching performance (Inverse Earned Run Average), hitting performance (Runs Earned), and overall team payroll. The most effective teams would have small circles and be positioned in the top right quadrant.
+
+An interesting observations is that there is a noticeble difference between the big and small market teams. The Orioles have just under a third of the budget of the Dodgers, Rangers, Astros, and Blue Jays but perform very similary in pitching. Also, despite the Chicago Cubs scoring the 6th most amount of runs in the season they only won 83 games and thus were 1 game out from making the playoffs. 
+									</span>
+								</div>
+							</div>
+								<span class="card-footer">*The inverse ERA was calculated so visual semantics would better align. ERA is actually worse for a team as it implies they allow more runs per pitcher. Hover over each team to see how they matched up.</span>
+						</div>
+						<div class='step' data-step='5'>
+							<div>
+								<div>
+									<h1 class="display-4 card-title"><b>The Key Players</b></h1>
+									<span class="card-content">
+Given that expensive teams don't always perform the best, it's important to understand which players most directly affect their results.
+
+By plotting each postseason team player's On Base Percentage (OBP) against their Slugging (how many bases they earn when they hit), it's possible to see which players are most valuable to a team's offense. 
+
+Filtering by team shows how each team's talent is distributed, and interestingly enough it's quite similar. Apart from the Braves, Phillies, and Dodgers who have nearly a full roster of consistent offense, each team appears to have a few key players where the rest of the team is talented enough to complement them.
+									</span>
+								</div>
+							</div>
+							<span class="card-footer">*Hover over each dot to see individual player stats.</span>
+						</div>
+						<div class='step' data-step='6'>
+							<div>
+								<div>
+
+								<h1 class="display-4 card-title"><b>Rising to the Occasion</b></h1>
+								<span class="card-content">
+Seeing so many elite players belonging to the Braves or Dodgers on the previous chart, it's a surprise that these teams were all eliminated so early in the postseason.
+
+It's possible to track whether each player cracked under the pressure of playoffs or rose to the occasion. By plotting each player's OPS (On Base plus Slugging, a cross of the metrics we plotted before) throughout playoffs, it's possible to track which teams underperformed in comparison to their regular season.
+
+Combined with the proportional runs each team scored per round on each axis, it becomes easier to see whether players were underperforming or if all of the competition got harder.
+							</span>
+							</div>
+							</div>
+							<span class="card-footer">*Regular season OPS is substituted for the Wild Card series for players who did not participate. This is done to reduce clutter while still representing the performance of each player over time.</span>
+
+						</div>
+						<div class='step' data-step='7'>
+							<div>
+								<div>
+
+								<h1 class="display-4 card-title"><b>Conclusion</b></h1>
+								<span class="card-content">
+Finally, we can see the full progression of the season. The 12 best teams making the playoffs were technically not the 12 best because of the exclusion of the Seattle Mariners. 
+
+Crowd favorites like the Braves and Dodgers suffered from the under-performance of their key players in the postseason. Despite their bye into the Divisional Series, they were both swept by the wild card winners. 
+
+The small payroll, modestly performing Diamondbacks had less volatility in their team's offense during their playoff run, which combined with their generally improved performance explains their appearance in the World Series.
+
+Ultimately, the Ranger's consistently dominant offence is what propelled them into the World Series. They had multiple players achieve a 1+ OPS during the postseason during each series, and this consistency helps explain how they secured their first championship title.
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!--  graphic container  -->
+				<div class='scroll__graphic'>
+					<!--   actual graphic/chart   -->
+					<div class='chart' id="chart">
+						<svg id="view1"></svg>
+						<div>
+							<div class="dropdown">
+								<button class="btn btn-secondary dropdown-toggle" type="button" id="teamSelectionDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Playoff Team Selection:
+								</button>
+								<div class="dropdown-menu" aria-labelledby="teamSelectionDropDown">
+									<button class="dropdown-item">NONE</button>
+									<button class="dropdown-item">ARIZONA DIAMONDBACKS</button>
+									<button class="dropdown-item">ATLANTA BRAVES</button>
+									<button class="dropdown-item">BALTIMORE ORIOLES</button>
+									<button class="dropdown-item">HOUSTON ASTROS</button>
+									<button class="dropdown-item">LOS ANGELES DODGERS</button>
+									<button class="dropdown-item">MIAMI MARLINS</button>
+									<button class="dropdown-item">MILWAUKEE BREWERS</button>
+									<button class="dropdown-item">MINNESOTA TWINS</button>
+									<button class="dropdown-item">PHILADELPHIA PHILLIES</button>
+									<button class="dropdown-item">TAMPA BAY RAYS</button>
+									<button class="dropdown-item">TEXAS RANGERS</button>
+									<button class="dropdown-item">TORONTO BLUE JAYS</button>
+								</div>
+								<span class="active-team">None</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+			</section>
+			<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	</body>
+</html>

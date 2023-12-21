@@ -1,0 +1,7 @@
+https://www.baseball-reference.com/postseason/
+
+- Player performance for each series of the playoffs was downloaded, then aggregated together manually
+- Intermediate python utilities were developed, and Series/ Team Code columns were added
+
+
+Provided by <a href="https://www.sports-reference.com/sharing.html?utm_source=direct&utm_medium=Share&utm_campaign=ShareTool">Baseball-Reference.com</a>: <a href="https://www.baseball-reference.com/postseason/2023_NLCS.shtml?sr&utm_source=direct&utm_medium=Share&utm_campaign=ShareTool#post_batting_ARI">View Original Table</a><br>Generated 11/21/2023.

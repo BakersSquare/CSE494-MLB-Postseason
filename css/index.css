@@ -1,0 +1,128 @@
+#scroll {
+  position: relative;
+}
+
+.scroll__graphic {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: auto;
+  width: 100vw;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+/* Add the .is-fixed class to dictate when the graphic should stick in it's position */
+.scroll__graphic.chart.is-fixed {
+  position: sticky;
+}
+
+/* .is-bottom dictates when our graphic should be overlayed (no longer important) and scroll */
+.scroll__graphic.is-bottom {
+  bottom: 0;
+  top: auto;
+}
+
+/* Non full-screen, vertically centered chart */
+.scroll__graphic .chart {
+  position: absolute;
+  right: 1vw;
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  height: 75vh;
+  top: 50%;
+  -moz-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.drop-down {
+  width: 5vw;
+ }
+
+ 
+.dropdown-menu{
+  overflow-y: scroll;
+ }
+
+
+/* Left alligned text approach for scrolling */
+.scroll__text {
+  padding: 0 1vw;
+  display: flex;
+  flex-direction: column;
+  width: 33vw;
+  margin: 10vh 1vw;
+}
+
+.step {
+  opacity: 0;
+  transition: opacity 0.3s;
+  background-color: lightgray;
+  border: 1px solid black;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  padding: 2vh 1vw;
+  z-index: 1;
+}
+
+.step.is-active {
+  opacity: 1;
+  z-index: 3;
+
+}
+
+.card-title {
+  font-size: 4vh;
+}
+
+.card-content {
+  font-size: 2vh;
+  white-space: pre-wrap;
+}
+
+.card-footer {
+  font-size: 1.5vh;
+}
+
+.tooltip {
+  position: absolute;
+  text-align: center;
+  width: auto;
+  padding: 8px;
+  font: 12px sans-serif;
+  background: lightsteelblue;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
+  line-height: 1.5;
+  opacity: 0;
+  transition: opacity 0.3s;
+  white-space: pre-wrap;
+}
+
+.sticky-header {
+  height: 8vh;
+  font-size: 4vh;
+  flex-direction: row; 
+  display: flex; 
+  align-items: center; 
+  background-color: var(--dark);
+  position: fixed;
+  top: 0;
+  width: 100%; 
+  justify-content: center; 
+  z-index: 5;
+  padding: 12px;
+}
+
+
+h2, h3 {
+  color: var(--light);
+}
