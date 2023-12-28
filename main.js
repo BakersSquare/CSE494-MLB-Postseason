@@ -651,13 +651,23 @@ function renderSvgFromStep(index){
   // (a|n)lwc -> (a|n)lds -> (a|n)lcs -> wc
   
   const dimensions = ["Regular Season", "Wild Card", 'Division Series', 'Division Championship', 'World Series']
-  
+  // calculate the max of all OPS so we can use it to normalize the cross-time scale
+  let maxOPS = 0;
+  for (const dataSet of dimensions) {
+    const columnValue = getColumnValue(dataSet)
+    const [min, max] = d3.extent(data, function(d) { return +d[columnValue]; })
+    if(max > maxOPS){
+      maxOPS = max 
+    }
+  }
+
+
   // For each dimension, Build the functions linear that map the value to the vertical point.
   const heightFunctions = {}
   for (const dataSet of dimensions) {
     const columnValue = getColumnValue(dataSet)
     heightFunctions[dataSet] = d3.scaleLinear()
-      .domain( d3.extent(data, function(d) { return +d[columnValue]; }) )
+      .domain([0, maxOPS] )
       .range([innerHeight + margin.top, margin.bottom])
   }
   
